@@ -6,6 +6,13 @@ import reportWebVitals from "./reportWebVitals";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+
+declare global {
+  interface Window {
+    webkit?: any;
+  }
+}
+
 root.render(
   <React.StrictMode>
     <App />
