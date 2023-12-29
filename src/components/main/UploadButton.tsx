@@ -1,8 +1,23 @@
 import { useRef } from "react";
+import toast from "react-hot-toast";
 import styled from "styled-components";
+import { useParsingExcel } from "../../hooks";
 
 const UploadButton = () => {
   const ref = useRef<HTMLInputElement>(null);
+  const { mutate } = useParsingExcel();
+
+  const fileChange = async (e: any) => {
+    const file = e.target.files[0];
+    const formData: FormData = new FormData();
+    formData.append("file", file);
+
+    if (formData) {
+      mutate(formData);
+    } else {
+      toast.error("엑셀 파일을 선택해주세요.", { duration: 1000 });
+    }
+  };
 
   return (
     <>
@@ -10,7 +25,8 @@ const UploadButton = () => {
         style={{ display: "none" }}
         type="file"
         ref={ref}
-        onChange={() => ""}
+        accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        onChange={fileChange}
       />
       <Button
         onClick={() => {
