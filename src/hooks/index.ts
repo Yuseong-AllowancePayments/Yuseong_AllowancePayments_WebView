@@ -15,7 +15,7 @@ export const useParsingExcel = () => {
       }),
     {
       onSuccess: (response) => {
-        toast.success("성공", { duration: 1000 });
+        toast.success("파일이 업로드 되었습니다.", { duration: 1000 });
         if (window.webkit) {
           window.webkit.messageHandlers.btnClick.postMessage(response.data);
         }
